@@ -1,0 +1,6 @@
+number:3
+classes:[0,5]
+xyxy:([259,842])
+original_pic:22-04-07/a.png
+deal_pic:22-04-07/a.png
+spend_time:0.1347

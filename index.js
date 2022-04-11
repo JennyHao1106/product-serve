@@ -6,7 +6,7 @@ const port = 3000
 
 
 const serve  = require("./serve/index")
-
+const getJob = require('./serve/job')
 app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*'); //访问控制允许来源：所有
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -25,7 +25,8 @@ app.listen(port, () => {
 
 app.use('/serve',serve)
 
-
+// getJob.getCurrentDateDir();
+// getJob.onlineDataJob();
 
 
 
