@@ -1,5 +1,5 @@
 const express = require('express')
-
+const schedule = require('node-schedule')
 const app = express()
 
 const port = 3000
@@ -24,9 +24,14 @@ app.listen(port, () => {
 })
 
 app.use('/serve',serve)
-
+const scheduleCron = () => {
+    schedule.scheduleJob('*/1 * * * * *', () => {
+        getJob.onlineDataJob();
+    });
+}
+scheduleCron();
 // getJob.getCurrentDateDir();
-// getJob.onlineDataJob();
+ 
 
 
 

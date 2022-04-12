@@ -2,11 +2,22 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const fs = require("fs")
+const childProcess = require("child_process");
 let uploadFun = require('./upload')
 
 
-let uploadFolder = './public/upload';//规定上传文件的目录，使用相对路径
-let readPath = './db/data.json'
+let uploadFolder = '/home/jyc/zongzhuang/test/fucai_bendi_shangchuan/';//规定上传文件的目录，使用相对路径
+let readPath = './db/data.json';
+
+
+let config;
+if (process.env.NODE_ENV == 'production') {
+  config = require('../prod.js')
+} else {
+  config = require('../dev.js')
+}
+
+
 /**
  * @description 设置上传文件的信息，否则文件会被上传为二进制文件
  */
@@ -44,8 +55,10 @@ router.post('/upload', upload.array('file'), async (req, res) => {
       filepath: 'upload/' + elem.filename
     }
   });
-  result = await uploadFun.main();
-  res.status(result.code).send(result)
+  childProcess.exec(config.shell, (err, stdout, stderr) => {
+    result = uploadFun.main();
+    res.status(result.code).send(result);
+  })
 });
 router.get('/list', (req, res) => {
   fs.readFile(readPath, "UTF-8", function (err, data) {

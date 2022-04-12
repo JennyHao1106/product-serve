@@ -46,7 +46,7 @@ function changeFileToObj(data) {
  */
 function onlineDataJob() {
     // step 1
-    let docPath = config.picDocPath + getCurrentDateDir() + '/';
+    let docPath = config.picDocPath + getCurrentDateDir() + '/labels/';
     //step 2 
     let files = [];
     try {
@@ -65,8 +65,9 @@ function onlineDataJob() {
         }
         content = JSON.parse(fs.readFileSync(dbFilePath))
     } catch (error) {
-        console.log("初始化文件报错")
+        console.log("job-初始化文件报错")
     }
+   
     //step 4 
     try {
         let count = 0;
